@@ -1,0 +1,23 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon files
+Icon?
+._*
+
+# Thumbnails
+Thumbs.db
+
+# macOS specific metadata
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Build artifacts
+dist/
+
+# Playwright test reports
+test-results/
+playwright-report/
