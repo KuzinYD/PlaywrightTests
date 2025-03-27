@@ -15,8 +15,8 @@ export class HomePage {
     return this.page.getByText("watch a video", { exact: true });
   }
 
-  private get watchOnYT() {
-    return this.page.locator(".ytp-impression-link");
+  private get moviePlayer() {
+    return this.page.locator(".uk-lightbox-items li iframe");
   }
 
   async getTitle() {
@@ -29,5 +29,10 @@ export class HomePage {
 
   async clickOnWatchVideo() {
     await this.watchVideoBttn.click();
+  }
+
+  async isMoviePlayerVisible(): Promise<boolean> {
+    await this.moviePlayer.waitFor({ timeout: 5000 }); // Wait for the movie player to appear
+    return this.moviePlayer.isVisible();
   }
 }

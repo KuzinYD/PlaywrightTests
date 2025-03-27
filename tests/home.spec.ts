@@ -39,5 +39,6 @@ test("Should open about us", async ({ page }) => {
 test("Should open video", async ({ page }) => {
   const home = new HomePage(page);
   await home.clickOnWatchVideo();
-  
+  await home.isMoviePlayerVisible();
+  expect(await home.isMoviePlayerVisible()).toBeTruthy();
 });
