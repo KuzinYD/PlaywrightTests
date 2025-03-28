@@ -1,4 +1,5 @@
 import { Page } from "@playwright/test";
+import { time } from "console";
 
 export class HomePage {
   constructor(private page: Page) {}
@@ -19,6 +20,14 @@ export class HomePage {
     return this.page.locator(".uk-lightbox-items li iframe");
   }
 
+  private get contactUsBttn() {
+    return this.page.locator('//html/body/main/div[1]/div/div/div/div[2]/a/span');
+  }
+
+  private get contactUsForm() {
+    return this.page.locator("#contactSection");
+  }
+
   async getTitle() {
     return this.page.title();
   }
@@ -32,6 +41,14 @@ export class HomePage {
   }
 
   async isMoviePlayerVisible(): Promise<boolean> {
-    return this.moviePlayer.isVisible(); 
+    return this.moviePlayer.isVisible();
+  }
+
+  async clickOnContactUs() {
+    await this.contactUsBttn.click();
+  }
+
+  async isContactUsFormVisible(): Promise<boolean> {
+    return await this.contactUsForm.isVisible();
   }
 }

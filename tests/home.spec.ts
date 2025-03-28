@@ -42,3 +42,10 @@ test("Should open video", async ({ page }) => {
   await home.isMoviePlayerVisible();
   expect(await home.isMoviePlayerVisible()).toBeTruthy();
 });
+
+test("Should check if contact Us section is in focus", async ({ page }) => {
+  const home = new HomePage(page);
+  await home.clickOnContactUs();
+  expect(await home.isContactUsFormVisible()).toBeTruthy();
+  await page.pause();
+});
