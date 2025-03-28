@@ -32,7 +32,6 @@ export class HomePage {
   }
 
   async isMoviePlayerVisible(): Promise<boolean> {
-    await this.moviePlayer.waitFor({ timeout: 5000 }); // Wait for the movie player to appear
-    return this.moviePlayer.isVisible();
+    return this.moviePlayer.isVisible(); 
   }
 }
