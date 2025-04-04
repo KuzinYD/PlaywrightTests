@@ -7,8 +7,8 @@ on:
     branches: [main, master]
 
 permissions:
-  contents: write
-  actions: write
+  contents: read
+  actions: read
 
 jobs:
   test:
@@ -20,8 +20,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+      - name: Install Dependencies
+        run: npm install
+      - name: Install Playwright Browsers
+        run: npx playwright install
+      - name: Run Playwright Tests
+        run: npx playwright test
       - name: Debug GITHUB_TOKEN Permissions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "Inspecting GITHUB_TOKEN
+          echo "Inspecting GITHUB_TOKEN permissions"
+          curl -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/
