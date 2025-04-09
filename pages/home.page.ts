@@ -1,31 +1,27 @@
-import { Page } from "@playwright/test";
-import { time } from "console";
+import { expect, type Locator, type Page } from "@playwright/test";
 
 export class HomePage {
-  constructor(private page: Page) {}
+  readonly page: Page;
+  readonly mainTitle: Locator;
+  readonly watchVideoBttn: Locator;
+  readonly moviePlayer: Locator;
+  readonly contactUsBttn: Locator;
+  readonly contactUsForm: Locator;
 
-  // Define locators
-  private get mainTitle() {
-    return this.page.getByText(
+  constructor(page: Page) {
+    this.page = page;
+    this.mainTitle = page.getByText(
       "clarity for investors visibility for developers",
       { exact: true }
     );
-  }
-
-  private get watchVideoBttn() {
-    return this.page.getByText("watch a video", { exact: true });
-  }
-
-  private get moviePlayer() {
-    return this.page.locator(".uk-lightbox-items li iframe");
-  }
-
-  private get contactUsBttn() {
-    return this.page.locator('//html/body/main/div[1]/div/div/div/div[2]/a/span');
-  }
-
-  private get contactUsForm() {
-    return this.page.locator("#contactSection");
+    this.watchVideoBttn = page.getByText("watch a video", {
+      exact: true,
+    });
+    this.moviePlayer = page.locator(".uk-lightbox-items li iframe");
+    this.contactUsBttn = page.locator(
+      "//html/body/main/div[1]/div/div/div/div[2]/a/span"
+    );
+    this.contactUsForm = page.locator("#contactSection");
   }
 
   async getTitle() {
@@ -50,5 +46,10 @@ export class HomePage {
 
   async isContactUsFormVisible(): Promise<boolean> {
     return await this.contactUsForm.isVisible();
+  }
+
+  async isContactUsFormInViewport() {
+    console.log("Accessing contact us form in viewport");
+    await expect(this.contactUsForm).toBeInViewport();
   }
 }

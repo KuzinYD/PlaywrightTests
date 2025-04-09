@@ -43,8 +43,9 @@ test("Should open video", async ({ page }) => {
   expect(await home.isMoviePlayerVisible()).toBeTruthy();
 });
 
-test("Should check if contact Us section is in focus", async ({ page }) => {
+test("Should check if contact us section is in focus", async ({ page }) => {
   const home = new HomePage(page);
   await home.clickOnContactUs();
+  await home.isContactUsFormInViewport();
   expect(await home.isContactUsFormVisible()).toBeTruthy();
 });
