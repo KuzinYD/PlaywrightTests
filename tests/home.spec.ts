@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../pages/home.page";
 import { Navbar } from "../pages/components/Navbar";
+import { SearchBar } from "../pages/components/SearchBar";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -48,4 +49,9 @@ test("Should check if contact us section is in focus", async ({ page }) => {
   await home.clickOnContactUs();
   await home.isContactUsFormInViewport();
   expect(await home.isContactUsFormVisible()).toBeTruthy();
+});
+
+test("Should input keywords in search bar", async ({ page }) => {
+  const searchBar = new SearchBar(page);
+  await searchBar.typeInKeywordInput("test");
 });

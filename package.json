@@ -10,5 +10,8 @@
   "devDependencies": {
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.13.14"
+  },
+  "dependencies": {
+    "winston": "^3.17.0"
   }
 }
